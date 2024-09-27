@@ -1,9 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { useContext } from 'react';
 import { ShoppingCartContext } from '../../Context';
+import { ShoppingBagIcon } from '@heroicons/react/20/solid';
 
 const Navbar = () => {
   const context = useContext(ShoppingCartContext);
@@ -101,9 +100,9 @@ const Navbar = () => {
         <li>
           <NavLink to='/signin'>Signin</NavLink>
         </li>
-        <li className='relative'>
-          <FontAwesomeIcon icon={faShoppingCart} />
-          <span className='absolute top-[-15px] right-[-15px] w-6 h-6 flex items-center justify-center  rounded-full bg-red-600 text-white py-2 px-2 text-xs'>
+        <li className='flex items-center '>
+          <ShoppingBagIcon className='size-5' />
+          <span className=' flex items-center justify-center  rounded-full bg-red-600 text-white py-1 px-2 text-xs'>
             {context.count}
           </span>
         </li>
