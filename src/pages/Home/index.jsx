@@ -5,6 +5,8 @@ import { useEffect } from 'react';
 import Layout from '../../components/Layout';
 import ProductDetail from '../../components/ProductDetail';
 
+import './styles.css';
+
 function Home() {
   const [products, setProducts] = useState([]);
 
@@ -13,6 +15,7 @@ function Home() {
       .then((response) => response.json())
       .then((data) => {
         setProducts(data);
+        // console.log('Products: ', data);
       });
   }, []);
   return (
