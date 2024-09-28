@@ -1,4 +1,3 @@
-import React from 'react';
 import './styles.css';
 import { XMarkIcon } from '@heroicons/react/16/solid';
 import { useContext } from 'react';
@@ -10,8 +9,8 @@ const ProductDetail = () => {
   return (
     <aside
       className={`${
-        context.isProductDetailOpen ? 'flex' : 'hidden'
-      }  product-detail  flex flex-col fixed right-0 border border-gray-300 rounded-s-lg shadow-lg bg-white`}
+        context.isProductDetailOpen ? 'flex' : 'hidden '
+      }  product-detail  flex flex-col fixed right-0 border border-gray-300 rounded-s-lg shadow-lg bg-white `}
     >
       <div className='flex justify-between items-center p-6'>
         <h2 className='font-medium text-xl '>Detail</h2>

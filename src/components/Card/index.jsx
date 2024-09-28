@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { useContext } from 'react';
 import { ShoppingCartContext } from '../../Context';
 import { PlusIcon } from '@heroicons/react/16/solid';
@@ -12,8 +10,12 @@ const Card = ({ data }) => {
     context.setProductToShow(productDetail);
   };
 
-  const addProductToCart = (productData) => {
+  const addProductsToCart = (event, productData) => {
+    event.stopPropagation();
     context.setCartProducts([...context.cartProducts, productData]);
+    context.openCheckoutSideMenu();
+    context.closeProductDetail();
+
     console.log('CART: ', context.cartProducts);
   };
 
@@ -33,7 +35,7 @@ const Card = ({ data }) => {
         />
         <div
           className='absolute  top-0 right-0 flex justify-center items-center bg-white w-6 h-6 rounded-full m-2 text-lg font-bold active:bg-gray-100'
-          onClick={() => addProductToCart(data)}
+          onClick={(event) => addProductsToCart(event, data)}
         >
           <PlusIcon className='size-5' />
         </div>

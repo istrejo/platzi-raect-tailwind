@@ -1,4 +1,3 @@
-import React from 'react';
 import Card from '../../components/Card';
 import { useState } from 'react';
 import { useEffect } from 'react';
