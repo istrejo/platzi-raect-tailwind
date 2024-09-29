@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { ShoppingCartContext } from '../../Context';
-import { PlusIcon } from '@heroicons/react/16/solid';
+import { PlusIcon, CheckIcon } from '@heroicons/react/16/solid';
 
 const Card = ({ data }) => {
   const context = useContext(ShoppingCartContext);
@@ -8,6 +8,7 @@ const Card = ({ data }) => {
   const showProduct = (productDetail) => {
     context.openProductDetail();
     context.setProductToShow(productDetail);
+    context.closeCheckoutSideMenu();
   };
 
   const addProductsToCart = (event, productData) => {
@@ -15,8 +16,29 @@ const Card = ({ data }) => {
     context.setCartProducts([...context.cartProducts, productData]);
     context.openCheckoutSideMenu();
     context.closeProductDetail();
+  };
 
-    console.log('CART: ', context.cartProducts);
+  const renderIcon = (id) => {
+    const isInCart =
+      context.cartProducts.filter((product) => product.id === id)
+        .length > 0;
+
+    if (isInCart) {
+      return (
+        <div className='absolute  top-0 right-0 flex justify-center items-center bg-black w-6 h-6 rounded-full m-2 text-lg font-bold active:bg-gray-100'>
+          <CheckIcon className='size-5  text-white ' />
+        </div>
+      );
+    } else {
+      return (
+        <div
+          className='absolute  top-0 right-0 flex justify-center items-center bg-white w-6 h-6 rounded-full m-2 text-lg font-bold active:bg-gray-100'
+          onClick={(event) => addProductsToCart(event, data)}
+        >
+          <PlusIcon className='size-5 text-black' />
+        </div>
+      );
+    }
   };
 
   return (
@@ -31,14 +53,9 @@ const Card = ({ data }) => {
         <img
           className='w-full h-full object-cover rounded-lg'
           src={data.images}
-          alt={data.description}
+          alt={data.title}
         />
-        <div
-          className='absolute  top-0 right-0 flex justify-center items-center bg-white w-6 h-6 rounded-full m-2 text-lg font-bold active:bg-gray-100'
-          onClick={(event) => addProductsToCart(event, data)}
-        >
-          <PlusIcon className='size-5' />
-        </div>
+        {renderIcon(data.id)}
       </figure>
       <p className='flex justify-between mb-2'>
         <span className='text-sm font-light mx-2 '>{data.title}</span>

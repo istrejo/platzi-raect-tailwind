@@ -7,6 +7,9 @@ import { ShoppingBagIcon } from '@heroicons/react/20/solid';
 const Navbar = () => {
   const context = useContext(ShoppingCartContext);
   const activeStyle = 'underline underline-offset-4';
+  const openCart = () => {
+    context.openCheckoutSideMenu();
+  };
 
   return (
     <nav className='w-full flex justify-between items-center fixed top-0 z-10 py-5 px-8 text-sm bg-white '>
@@ -100,7 +103,10 @@ const Navbar = () => {
         <li>
           <NavLink to='/signin'>Signin</NavLink>
         </li>
-        <li className='flex items-center '>
+        <li
+          onClick={() => openCart()}
+          className='flex items-center cursor-pointer'
+        >
           <ShoppingBagIcon className='size-5' />
           <span className=' flex items-center justify-center  rounded-full bg-red-600 text-white py-1 px-2 text-xs'>
             {context.cartProducts?.length}
