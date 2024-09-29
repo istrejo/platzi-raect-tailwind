@@ -1,15 +1,28 @@
 import { XMarkIcon } from '@heroicons/react/16/solid';
+import { useState } from 'react';
 
 const OrderCard = (props) => {
   const { title, price, imageUrl } = props;
+
+  // Image format error
+  const [imageError, setImageError] = useState(false);
+  const handleImageError = () => {
+    setImageError(true);
+  };
+
   return (
     <div className=' flex justify-between items-center mb-3'>
       <div className='flex items-center gap-2'>
         <figure className='w-20 h-20'>
           <img
             className='w-full h-full rounded-lg object-cover'
-            src={imageUrl}
+            src={
+              !imageError
+                ? imageUrl
+                : 'https://isto.pt/cdn/shop/files/Heavyweight_Black_ef459afb-ff7a-4f9a-b278-9e9621335444.webp?v=1710414950'
+            }
             alt={title}
+            onError={handleImageError}
           />
         </figure>
         <p className='text-sm font-light '>{title}</p>

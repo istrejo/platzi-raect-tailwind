@@ -1,9 +1,16 @@
 import { useContext } from 'react';
 import { ShoppingCartContext } from '../../Context';
 import { PlusIcon, CheckIcon } from '@heroicons/react/16/solid';
+import { useState } from 'react';
 
 const Card = ({ data }) => {
   const context = useContext(ShoppingCartContext);
+
+  // Image format error
+  const [imageError, setImageError] = useState(false);
+  const handleImageError = () => {
+    setImageError(true);
+  };
 
   const showProduct = (productDetail) => {
     context.openProductDetail();
@@ -52,8 +59,13 @@ const Card = ({ data }) => {
         </span>
         <img
           className='w-full h-full object-cover rounded-lg'
-          src={data.images}
+          src={
+            !imageError
+              ? data.images[0]
+              : 'https://isto.pt/cdn/shop/files/Heavyweight_Black_ef459afb-ff7a-4f9a-b278-9e9621335444.webp?v=1710414950'
+          }
           alt={data.title}
+          onError={handleImageError}
         />
         {renderIcon(data.id)}
       </figure>
