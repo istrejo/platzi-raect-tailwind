@@ -9,6 +9,7 @@ const Navbar = () => {
   const activeStyle = 'underline underline-offset-4';
   const openCart = () => {
     context.openCheckoutSideMenu();
+    context.closeProductDetail();
   };
 
   return (

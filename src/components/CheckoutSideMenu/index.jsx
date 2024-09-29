@@ -7,9 +7,6 @@ import { totalPrice } from '../../utils';
 
 const CheckoutSideMenu = () => {
   const context = useContext(ShoppingCartContext);
-  console.log('CART: ', context.cartProducts);
-
-  const total = totalPrice(context.cartProducts);
 
   const handleDelete = (id) => {
     const filteredProducts = context.cartProducts.filter(
@@ -26,7 +23,6 @@ const CheckoutSideMenu = () => {
     >
       <div className='flex justify-between items-center p-6'>
         <h2 className='font-medium text-xl '>My Order</h2>
-        <span>{total}</span>
         <div
           className='rounded-full cursor-pointer active:bg-gray-200 hover:bg-gray-200'
           onClick={() => context.closeCheckoutSideMenu()}
@@ -45,6 +41,14 @@ const CheckoutSideMenu = () => {
             handleDelete={handleDelete}
           />
         ))}
+      </div>
+      <div className='px-6  '>
+        <p className='flex justify-between items-center'>
+          <span className='font-light'>Total: </span>
+          <span className='font-medium text-2xl'>
+            ${totalPrice(context.cartProducts)}
+          </span>
+        </p>
       </div>
     </aside>
   );
