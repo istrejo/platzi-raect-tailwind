@@ -2,9 +2,16 @@ import './styles.css';
 import { XMarkIcon } from '@heroicons/react/16/solid';
 import { useContext } from 'react';
 import { ShoppingCartContext } from '../../Context';
+import { useState } from 'react';
 
 const ProductDetail = () => {
   const context = useContext(ShoppingCartContext);
+
+  // Image format error
+  const [imageError, setImageError] = useState(false);
+  const handleImageError = () => {
+    setImageError(true);
+  };
 
   return (
     <aside
@@ -24,8 +31,13 @@ const ProductDetail = () => {
       <figure className='px-3'>
         <img
           className='w-full h-full rounded-lg'
-          src={context.productToShow.images}
+          src={
+            !imageError
+              ? context.productToShow.images
+              : 'https://isto.pt/cdn/shop/files/Heavyweight_Black_ef459afb-ff7a-4f9a-b278-9e9621335444.webp?v=1710414950'
+          }
           alt={context.productToShow.title}
+          onError={handleImageError}
         />
       </figure>
       <p className='flex flex-col p-6'>
@@ -35,7 +47,7 @@ const ProductDetail = () => {
         <span className='font-medium  text-md'>
           {context.productToShow.title}
         </span>
-        <span className='font-light  text-sm'>
+        <span className='font-light  text-sm '>
           {context.productToShow.description}
         </span>
       </p>
