@@ -7,6 +7,13 @@ const CheckoutSideMenu = () => {
   const context = useContext(ShoppingCartContext);
   console.log('CART: ', context.cartProducts);
 
+  const handleDelete = (id) => {
+    const filteredProducts = context.cartProducts.filter(
+      (product) => product.id !== id
+    );
+    context.setCartProducts(filteredProducts);
+  };
+
   return (
     <aside
       className={`${
@@ -22,13 +29,15 @@ const CheckoutSideMenu = () => {
           <XMarkIcon className='size-6' />
         </div>
       </div>
-      <div className='px-6 overflow-y-scroll'>
+      <div className='px-6 overflow-y-scroll divide-y'>
         {context.cartProducts.map((product) => (
           <OrderCard
             key={product.id}
+            id={product.id}
             title={product.title}
             imageUrl={product.images}
             price={product.price}
+            handleDelete={handleDelete}
           />
         ))}
       </div>

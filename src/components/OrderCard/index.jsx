@@ -2,7 +2,7 @@ import { XMarkIcon } from '@heroicons/react/16/solid';
 import { useState } from 'react';
 
 const OrderCard = (props) => {
-  const { title, price, imageUrl } = props;
+  const { id, title, price, imageUrl, handleDelete } = props;
 
   // Image format error
   const [imageError, setImageError] = useState(false);
@@ -29,7 +29,10 @@ const OrderCard = (props) => {
       </div>
       <div className='flex items-center gap-2'>
         <p className='text-lg font-medium'>{price}</p>
-        <XMarkIcon className='size-5' />
+        <XMarkIcon
+          onClick={() => handleDelete(id)}
+          className='size-5 hover:bg-gray-300 rounded-full active:bg-gray-400'
+        />
       </div>
     </div>
   );
