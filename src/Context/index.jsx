@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { createContext } from 'react';
 
 export const ShoppingCartContext = createContext();
@@ -8,7 +8,8 @@ export const ShoppingCartProvider = ({ children }) => {
   const [count, setCount] = useState(0);
 
   // Product Detail . Open/Close
-  const [isProductDetailOpen, setIsProductDetailOpen] = useState(false);
+  const [isProductDetailOpen, setIsProductDetailOpen] =
+    useState(false);
   const openProductDetail = () => {
     setIsProductDetailOpen(true);
   };
@@ -17,7 +18,8 @@ export const ShoppingCartProvider = ({ children }) => {
   };
 
   // Checkout Side Menu . Open/Close
-  const [isCheckoutSideMenuOpen, setIsCheckoutSideMenuOpen] = useState(false);
+  const [isCheckoutSideMenuOpen, setIsCheckoutSideMenuOpen] =
+    useState(false);
   const openCheckoutSideMenu = () => {
     setIsCheckoutSideMenuOpen(true);
   };
@@ -33,6 +35,36 @@ export const ShoppingCartProvider = ({ children }) => {
 
   // Shopping Cart . Order
   const [order, setOrder] = useState([]);
+
+  // Get Products
+  const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState(products);
+
+  // get products by title
+  const [searchByTitle, setSearchByTitle] = useState('');
+
+  console.log('searchByTitle: ', searchByTitle);
+
+  useEffect(() => {
+    fetch('https://api.escuelajs.co/api/v1/products')
+      .then((response) => response.json())
+      .then((data) => {
+        setProducts(data);
+      });
+  }, []);
+
+  const filterItemsByTitle = (items, searchByTitle) => {
+    return items?.filter((item) =>
+      item.title.toLowerCase().includes(searchByTitle.toLowerCase())
+    );
+  };
+
+  useEffect(() => {
+    if (searchByTitle.trim())
+      setFilteredProducts(
+        filterItemsByTitle(products, searchByTitle)
+      );
+  }, [products, searchByTitle]);
 
   return (
     <ShoppingCartContext.Provider
@@ -51,6 +83,12 @@ export const ShoppingCartProvider = ({ children }) => {
         closeCheckoutSideMenu,
         order,
         setOrder,
+        products,
+        setProducts,
+        searchByTitle,
+        setSearchByTitle,
+        filteredProducts,
+        setFilteredProducts,
       }}
     >
       {children}
