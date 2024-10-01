@@ -4,6 +4,17 @@ import { useState } from 'react';
 const OrderCard = (props) => {
   const { id, title, price, imageUrl, handleDelete } = props;
 
+  let renderXMarkIcon;
+
+  if (handleDelete) {
+    renderXMarkIcon = (
+      <XMarkIcon
+        onClick={() => handleDelete(id)}
+        className='size-5 hover:bg-gray-300 rounded-full active:bg-gray-400'
+      />
+    );
+  }
+
   // Image format error
   const [imageError, setImageError] = useState(false);
   const handleImageError = () => {
@@ -28,11 +39,8 @@ const OrderCard = (props) => {
         <p className='text-sm font-light '>{title}</p>
       </div>
       <div className='flex items-center gap-2'>
-        <p className='text-lg font-medium'>{price}</p>
-        <XMarkIcon
-          onClick={() => handleDelete(id)}
-          className='size-5 hover:bg-gray-300 rounded-full active:bg-gray-400'
-        />
+        <p className='text-lg font-medium'>${price}</p>
+        {renderXMarkIcon}
       </div>
     </div>
   );

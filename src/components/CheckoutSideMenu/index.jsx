@@ -4,6 +4,7 @@ import { useContext } from 'react';
 import { ShoppingCartContext } from '../../Context';
 import OrderCard from '../OrderCard';
 import { totalPrice } from '../../utils';
+import { Link } from 'react-router-dom';
 
 const CheckoutSideMenu = () => {
   const context = useContext(ShoppingCartContext);
@@ -25,6 +26,7 @@ const CheckoutSideMenu = () => {
 
     context.setOrder([...context.order, orderToAdd]);
     context.setCartProducts([]);
+    context.closeCheckoutSideMenu();
   };
 
   return (
@@ -61,13 +63,16 @@ const CheckoutSideMenu = () => {
             ${totalPrice(context.cartProducts)}
           </span>
         </p>
-        <button
-          className='w-full py-3 rounded-lg font-bold bg-black hover:bg-gray-800 active:bg-gray-700 text-white '
-          onClick={() => handleCheckout()}
-          type='button'
-        >
-          Checkout
-        </button>
+        <Link to={'/my-orders/last'}>
+          <button
+            className='w-full py-3 rounded-lg font-bold bg-black hover:bg-gray-800 active:bg-gray-700 text-white disabled:bg-gray-600 disabled:select-text'
+            onClick={() => handleCheckout()}
+            type='button'
+            disabled={!context.cartProducts.length}
+          >
+            Checkout
+          </button>
+        </Link>
       </div>
     </aside>
   );
