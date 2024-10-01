@@ -1,4 +1,3 @@
-import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useContext } from 'react';
 import { ShoppingCartContext } from '../../Context';
@@ -21,9 +20,7 @@ const Navbar = () => {
         <li>
           <NavLink
             to='/'
-            className={({ isActive }) =>
-              isActive ? activeStyle : undefined
-            }
+            className={({ isActive }) => (isActive ? activeStyle : undefined)}
           >
             All
           </NavLink>
@@ -31,9 +28,7 @@ const Navbar = () => {
         <li>
           <NavLink
             to='/clothes'
-            className={({ isActive }) =>
-              isActive ? activeStyle : undefined
-            }
+            className={({ isActive }) => (isActive ? activeStyle : undefined)}
           >
             Clothes
           </NavLink>
@@ -41,9 +36,7 @@ const Navbar = () => {
         <li>
           <NavLink
             to='/electronics'
-            className={({ isActive }) =>
-              isActive ? activeStyle : undefined
-            }
+            className={({ isActive }) => (isActive ? activeStyle : undefined)}
           >
             Electronics
           </NavLink>
@@ -51,9 +44,7 @@ const Navbar = () => {
         <li>
           <NavLink
             to='/fornitures'
-            className={({ isActive }) =>
-              isActive ? activeStyle : undefined
-            }
+            className={({ isActive }) => (isActive ? activeStyle : undefined)}
           >
             Fornitures
           </NavLink>
@@ -61,9 +52,7 @@ const Navbar = () => {
         <li>
           <NavLink
             to='/toys'
-            className={({ isActive }) =>
-              isActive ? activeStyle : undefined
-            }
+            className={({ isActive }) => (isActive ? activeStyle : undefined)}
           >
             Toys
           </NavLink>
@@ -71,9 +60,7 @@ const Navbar = () => {
         <li>
           <NavLink
             to='/others'
-            className={({ isActive }) =>
-              isActive ? activeStyle : undefined
-            }
+            className={({ isActive }) => (isActive ? activeStyle : undefined)}
           >
             Others
           </NavLink>
@@ -84,9 +71,7 @@ const Navbar = () => {
         <li>
           <NavLink
             to='/my-orders'
-            className={({ isActive }) =>
-              isActive ? activeStyle : undefined
-            }
+            className={({ isActive }) => (isActive ? activeStyle : undefined)}
           >
             My Orders
           </NavLink>
@@ -94,9 +79,7 @@ const Navbar = () => {
         <li>
           <NavLink
             to='/my-account'
-            className={({ isActive }) =>
-              isActive ? activeStyle : undefined
-            }
+            className={({ isActive }) => (isActive ? activeStyle : undefined)}
           >
             My Account
           </NavLink>
