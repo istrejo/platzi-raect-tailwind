@@ -11,18 +11,12 @@ function Home() {
   const context = useContext(ShoppingCartContext);
 
   const renderView = () => {
-    if (context.searchByTitle || context.searchByCategory) {
-      if (context.filteredProducts?.length) {
-        return context.filteredProducts?.map((product) => (
-          <Card key={product.id} data={product} />
-        ));
-      } else {
-        return <p className='text-lg '>We dont have anything :(</p>;
-      }
-    } else {
-      return context.products?.map((product) => (
+    if (context.filteredProducts?.length) {
+      return context.filteredProducts?.map((product) => (
         <Card key={product.id} data={product} />
       ));
+    } else {
+      return <p className='text-lg '>We dont have anything :(</p>;
     }
   };
 
