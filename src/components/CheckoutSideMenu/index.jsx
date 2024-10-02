@@ -18,7 +18,6 @@ const CheckoutSideMenu = () => {
 
   const handleCheckout = () => {
     const orderToAdd = {
-      // id: new Date().getTime(),
       date: new Date().toLocaleDateString(),
       products: context.cartProducts,
       totalProducts: context.cartProducts.length,
@@ -28,7 +27,6 @@ const CheckoutSideMenu = () => {
     context.setOrder([...context.order, orderToAdd]);
     context.setCartProducts([]);
     context.closeCheckoutSideMenu();
-    console.log('Order: ', context.order);
   };
 
   return (

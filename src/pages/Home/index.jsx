@@ -11,13 +11,13 @@ function Home() {
   const context = useContext(ShoppingCartContext);
 
   const renderView = () => {
-    if (context.searchByTitle) {
+    if (context.searchByTitle || context.searchByCategory) {
       if (context.filteredProducts?.length) {
         return context.filteredProducts?.map((product) => (
           <Card key={product.id} data={product} />
         ));
       } else {
-        return <p className='text-lg '>We don't have anything :(</p>;
+        return <p className='text-lg '>We dont have anything :(</p>;
       }
     } else {
       return context.products?.map((product) => (
@@ -25,10 +25,6 @@ function Home() {
       ));
     }
   };
-
-  // const handleInput(event) {
-
-  // }
 
   return (
     <Layout>
@@ -39,9 +35,7 @@ function Home() {
         className='border-2 border-gray-300 w-[350px] rounded-lg px-3 py-2 mb-5 focus:border-gray-800 focus:outline-none focus:border-2'
         type='text'
         placeholder='Search a product'
-        onChange={(event) =>
-          context.setSearchByTitle(event.target.value)
-        }
+        onChange={(event) => context.setSearchByTitle(event.target.value)}
       />
       <div className='grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 w-full max-w-screen-lg place-items-center'>
         {renderView()}
